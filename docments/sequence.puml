@@ -1,0 +1,27 @@
+@startuml
+actor User
+participant "ログインシステム" as login
+participant "ユーザー認証" as auth
+participant "ユーザー管理" as management
+participant "セッション管理" as session
+participant "パスワードの暗号化" as encryption
+participant "セキュリティ機能" as security
+participant "エラー処理" as error
+participant "ログ機能" as logging
+
+User -> login: ログイン
+login -> auth: ユーザー認証要求
+auth -> management: ユーザー情報取得要求
+management -> auth: ユーザー情報送信
+auth -> encryption: パスワード暗号化要求
+encryption -> auth: 暗号化パスワード送信
+auth -> session: セッション開始要求
+session -> auth: セッショントークン送信
+login -> security: セキュリティ機能要求
+security -> auth: セキュリティ機能認証要求
+auth -> error: エラー処理要求
+error -> auth: エラーメッセージ送信
+auth -> logging: ログ送信要求
+logging -> auth: ログの記録
+
+@enduml
