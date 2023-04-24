@@ -1,0 +1,54 @@
+@startuml
+class User {
+  -username: String
+  -password: String
+  +login()
+  +logout()
+}
+
+class Authenticator {
+  +authenticate(username: String, password: String): boolean
+}
+
+class UserManager {
+  +getUser(username: String): User
+}
+
+class SessionManager {
+  +createSession(token: String): void
+  +getSession(token: String): Session
+  +invalidateSession(token: String): void
+}
+
+class PasswordEncryptor {
+  +encrypt(password: String): String
+}
+
+class SecurityManager {
+  +authorize(token: String): boolean
+}
+
+class ErrorManager {
+  +handleError(errorMessage: String): void
+}
+
+class LogManager {
+  +log(message: String): void
+}
+
+class Session {
+  -token: String
+  -user: User
+}
+
+User -> Authenticator
+User --> Session
+Authenticator -> UserManager
+Authenticator -> PasswordEncryptor
+Authenticator -> ErrorManager
+Session -> SessionManager
+SecurityManager --> Authenticator
+LogManager --> Authenticator
+ErrorManager --> Authenticator
+
+@enduml
