@@ -1,0 +1,22 @@
+@startuml
+left to right direction
+
+actor User
+rectangle "ログインシステム" as login {
+  rectangle "ユーザー認証" as auth
+  rectangle "ユーザー管理" as management
+  rectangle "セッション管理" as session
+  rectangle "パスワードの暗号化" as encryption
+  rectangle "セキュリティ機能" as security
+  rectangle "エラー処理" as error
+  rectangle "ログ機能" as logging
+
+  User --> auth
+  User --> management
+  auth --> session
+  auth --> encryption
+  auth --> error
+  security --> auth
+  logging --> auth
+}
+@enduml
